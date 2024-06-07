@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { LiaEditSolid } from "react-icons/lia";
 import {
-  BsBriefcase,
-  BsFacebook,
+  
   BsInstagram,
   BsPersonFillAdd,
 } from "react-icons/bs";
@@ -34,9 +33,7 @@ const ProfileCard = ({ user }) => {
               <p className='text-lg font-medium text-ascent-1'>
                 {user?.firstName} {user?.lastName}
               </p>
-              <span className='text-ascent-2'>
-                {user?.profession ?? "No Profession"}
-              </span>
+              
             </div>
           </Link>
 
@@ -64,10 +61,7 @@ const ProfileCard = ({ user }) => {
             <span>{user?.location ?? "Add Location"}</span>
           </div>
 
-          <div className='flex gap-2 items-center text-ascent-2'>
-            <BsBriefcase className=' text-lg text-ascent-1' />
-            <span>{user?.profession ?? "Add Profession"}</span>
-          </div>
+         
         </div>
 
         <div className='w-full flex flex-col gap-2 py-4 border-b border-[#66666645]'>
@@ -104,8 +98,8 @@ const ProfileCard = ({ user }) => {
             <span>Twitter</span>
           </div>
           <div className='flex gap-2 items-center text-ascent-2'>
-            <BsFacebook className=' text-xl text-ascent-1' />
-            <span>Facebook</span>
+            
+           
           </div>
         </div>
       </div>

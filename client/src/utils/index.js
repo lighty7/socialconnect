@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SetPosts } from '../redux/postSlice';
+import { setPosts} from '../redux/postSlice';
 const API_URL = 'http://localhost:8800';
 
 export const API = axios.create({
@@ -20,11 +20,12 @@ export const apiRequest = async (options) => {
     });
     return result?.data;
   } catch (error) {
-    const err = error.response.data;
+    const err = error.response ? error.response.data : error;
     console.error(err);
-    return { status: err.success, message: err.message };
+    return { status: 'failed', message: err.message || 'An error occurred' };
   }
 };
+
 
 export const handleFileUpload = async (uploadFile) => {
   const formData = new FormData();
@@ -50,7 +51,7 @@ export const fetchPosts = async (token, dispatch, uri, data) => {
       method: 'POST',
       data: data || {},
     });
-    dispatch(SetPosts(res?.data));
+    dispatch(setPosts(res?.data));
     return;
   } catch (error) {
     console.error(error);

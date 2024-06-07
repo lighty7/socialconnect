@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
@@ -8,7 +8,8 @@ import {
   ProfileCard,
   TopBar,
 } from "../components";
-import { posts } from "../assets/data";
+import { get, set } from "react-hook-form";
+
 
 const Profile = () => {
   const { id } = useParams();
@@ -17,10 +18,22 @@ const Profile = () => {
   // const { posts } = useSelector((state) => state.posts);
   const [userInfo, setUserInfo] = useState(user);
   const [loading, setLoading] = useState(false);
-
+  const uri = "/posts /get-user-post"+id;
+  const getUser = async () => {
+    const res = await getUserInfo(user?.token,id);
+    setUserInfo(res);
+  };
+  const getPosts = async () => {
+    await fetchPosts(user.token, dispatch, uri);
+    setLoading(false);
+  };
   const handleDelete = () => {};
   const handleLikePost = () => {};
-
+  useEffect(() => {
+      setLoading(true);
+      getUser();
+      getPosts();
+  },[id]);
   return (
     <>
       <div className='home w-full px-0 lg:px-10 pb-20 2xl:px-40 bg-bgColor lg:rounded-lg h-screen overflow-hidden'>

@@ -30,13 +30,14 @@ const EditProfile = () => {
 
     try {
       const uri = picture && (await handleFileUpload(picture));
-      const { firstName, lastName, location } = data;
+      const { firstName, lastName, location,profession } = data;
       const res = await apiRequest({
-        url: "/user/update-user",
+        url: "/users/update-user",
         data: {
           firstName,
           lastName,
           location,
+          profession,
           profileUrl: uri ? uri : user?.profileUrl,
         },
         method: "PUT",
